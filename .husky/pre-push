@@ -1,0 +1,14 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+npm run build
+
+git add dist
+git status | grep modified | grep 'dist/' && git commit --amend --no-edit
+
+npm run build:dts
+
+git add index.d.ts
+git status | grep modified | grep 'index.d.ts' && git commit --amend --no-edit
+
+npm test

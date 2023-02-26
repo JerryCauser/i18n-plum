@@ -1,0 +1,89 @@
+{
+  "name": "i18n-plum",
+  "version": "0.1.0",
+  "description": "i18n library for both front and back",
+  "main": "dist/cjs/i18n.js",
+  "module": "dist/esm/i18n.js",
+  "files": [
+    "/dist",
+    "/src",
+    "index.d.ts",
+    "CHANGELOG.md",
+    "README.md",
+    "LICENSE",
+    "package.json"
+  ],
+  "engines": {
+    "node": ">=16.10.0"
+  },
+  "scripts": {
+    "build:dts": "tsc && perl -pe 's/\\s*#private; *?\\n//' index.d.ts > tmp.types; mv tmp.types index.d.ts",
+    "build": "rm -rf ./dist/**/*.{js,js.map}; node esbuild.js",
+    "release:patch": "standard-version --release-as patch",
+    "release:minor": "standard-version --release-as minor",
+    "release:major": "standard-version --release-as major",
+    "push-with-tags": "git push --follow-tags origin master",
+    "prettify": "prettier --write -u './src/{**/*,*}.{js,ts,jsx,tsx}'",
+    "fix": "npm run prettify && eslint . --fix",
+    "prepare": "husky install",
+    "test": "eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JerryCauser/i18n-plum.git"
+  },
+  "keywords": [
+    "i18n",
+    "react-i18n",
+    "internationalization",
+    "localization"
+  ],
+  "license": "MIT",
+  "type": "module",
+  "author": "Artem Abzanov",
+  "bugs": {
+    "url": "https://github.com/JerryCauser/i18n-plum/issues"
+  },
+  "homepage": "https://github.com/JerryCauser/i18n-plum#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^18.14.1",
+    "esbuild": "^0.17.10",
+    "husky": "^8.0.3",
+    "prettier": "^2.8.4",
+    "standard-version": "^9.5.0",
+    "ts-standard": "^12.0.2"
+  },
+  "peerDependencies": {
+    "@types/react": "^18.0.28",
+    "react": "^18.2.0"
+  },
+  "peerDependenciesMeta": {
+    "@types/react": {
+      "optional": true
+    },
+    "react": {
+      "optional": true
+    }
+  },
+  "types": "./index.d.ts",
+  "eslintConfig": {
+    "parserOptions": {
+      "project": "tsconfig.json"
+    },
+    "env": {
+      "browser": true,
+      "node": true,
+      "es2022": true
+    },
+    "extends": [
+      "eslint:recommended",
+      "standard-with-typescript",
+      "standard-jsx"
+    ]
+  },
+  "eslintIgnore": [
+    "dist",
+    "index.d.ts"
+  ]
+}
