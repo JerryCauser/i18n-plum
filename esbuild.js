@@ -45,7 +45,7 @@ function ensureModuleFolder (alias) {
     },
     null,
     2
-  ))
+  ) + '\n')
 }
 
 function fillPackageJson (alias) {
@@ -79,7 +79,7 @@ for (const fileName of filesToBuild) {
   fillPackageJson(alias)
 }
 
-fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2))
+fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2) + '\n')
 
 /**
  * @param {'esm' | 'cjs' } format
