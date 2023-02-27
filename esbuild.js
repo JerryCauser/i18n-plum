@@ -48,8 +48,9 @@ function ensureModuleFolder (alias) {
   ))
 }
 
-function fillPackageJsonExports (alias) {
+function fillPackageJson (alias) {
   const fieldName = alias === 'index' ? '.' : `./${alias}`
+
   packageJson.exports[fieldName] = {
     // types: `./dist/index.d.ts`, // bundling all types in one file not works for now
     types: `./dist/types/${alias}.d.ts`,
@@ -57,15 +58,25 @@ function fillPackageJsonExports (alias) {
     module: `./dist/esm/${alias}.js`,
     default: `./dist/esm/${alias}.js`
   }
+
+  if (alias !== 'index') packageJson.files.push(`/${alias}`)
 }
 
+packageJson.files = [
+  '/dist',
+  '/src',
+  'CHANGELOG.md',
+  'README.md',
+  'LICENSE',
+  'package.json'
+]
 packageJson.exports = {}
 
 for (const fileName of filesToBuild) {
   const [alias] = fileName.split('.')
 
   ensureModuleFolder(alias)
-  fillPackageJsonExports(alias)
+  fillPackageJson(alias)
 }
 
 fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2))

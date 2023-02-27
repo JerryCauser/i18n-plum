@@ -37,14 +37,16 @@
     }
   },
   "files": [
-    "/types",
     "/dist",
     "/src",
-    "index.d.ts",
     "CHANGELOG.md",
     "README.md",
     "LICENSE",
-    "package.json"
+    "package.json",
+    "/i18n-react-remote-cache",
+    "/i18n-remote-cache",
+    "/i18n-remote",
+    "/i18n"
   ],
   "engines": {
     "node": ">=16.10.0"
@@ -57,9 +59,9 @@
     }
   },
   "scripts": {
+    "build": "npm run build:dts; npm run build:code",
     "build:dts": "tsc",
     "build:code": "rm -rf ./dist/**/*.{js,js.map}; node esbuild.js",
-    "build": "npm run build:dts; npm run build:code",
     "release:patch": "standard-version --release-as patch",
     "release:minor": "standard-version --release-as minor",
     "release:major": "standard-version --release-as major",
