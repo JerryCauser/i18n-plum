@@ -1,3 +1,5 @@
+import type { Nullable } from './types.js'
+
 /**
  * @param {Nullable<Map<string, any>>} map
  * @param {string | string[]} keys

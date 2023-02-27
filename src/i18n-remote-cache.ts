@@ -1,3 +1,4 @@
+import type { DictRecord } from './common/types.js'
 import type { RemoteI18Options } from './i18n-remote.js'
 import I18nRemote from './i18n-remote.js'
 

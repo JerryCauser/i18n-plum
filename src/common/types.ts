@@ -1,11 +1,7 @@
-export {}
+export type Nullable<T> = T | undefined | null
 
-declare global {
-  type Nullable<T> = T | undefined | null
-
-  interface DictRecord {
-    [index: string]: string | DictRecord
-  }
-
-  type MapRecord = Map<string, string | MapRecord>
+export interface DictRecord {
+  [index: string]: string | DictRecord
 }
+
+export type MapRecord = Map<string, string | MapRecord>

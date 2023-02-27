@@ -2,9 +2,42 @@
   "name": "i18n-plum",
   "version": "0.1.0",
   "description": "i18n library for both front and back",
-  "main": "dist/cjs/i18n.js",
-  "module": "dist/esm/i18n.js",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "exports": {
+    "./i18n-react-remote-cache": {
+      "types": "./dist/types/i18n-react-remote-cache.d.ts",
+      "require": "./dist/cjs/i18n-react-remote-cache.js",
+      "module": "./dist/esm/i18n-react-remote-cache.js",
+      "default": "./dist/esm/i18n-react-remote-cache.js"
+    },
+    "./i18n-remote-cache": {
+      "types": "./dist/types/i18n-remote-cache.d.ts",
+      "require": "./dist/cjs/i18n-remote-cache.js",
+      "module": "./dist/esm/i18n-remote-cache.js",
+      "default": "./dist/esm/i18n-remote-cache.js"
+    },
+    "./i18n-remote": {
+      "types": "./dist/types/i18n-remote.d.ts",
+      "require": "./dist/cjs/i18n-remote.js",
+      "module": "./dist/esm/i18n-remote.js",
+      "default": "./dist/esm/i18n-remote.js"
+    },
+    "./i18n": {
+      "types": "./dist/types/i18n.d.ts",
+      "require": "./dist/cjs/i18n.js",
+      "module": "./dist/esm/i18n.js",
+      "default": "./dist/esm/i18n.js"
+    },
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "require": "./dist/cjs/index.js",
+      "module": "./dist/esm/index.js",
+      "default": "./dist/esm/index.js"
+    }
+  },
   "files": [
+    "/types",
     "/dist",
     "/src",
     "index.d.ts",
@@ -16,9 +49,17 @@
   "engines": {
     "node": ">=16.10.0"
   },
+  "typesVersions": {
+    ">=4.2": {
+      "*": [
+        "types/*"
+      ]
+    }
+  },
   "scripts": {
-    "build:dts": "tsc && perl -pe 's/\\s*#private; *?\\n//' index.d.ts > tmp.types; mv tmp.types index.d.ts",
-    "build": "rm -rf ./dist/**/*.{js,js.map}; node esbuild.js",
+    "build:dts": "tsc",
+    "build:code": "rm -rf ./dist/**/*.{js,js.map}; node esbuild.js",
+    "build": "npm run build:dts; npm run build:code",
     "release:patch": "standard-version --release-as patch",
     "release:minor": "standard-version --release-as minor",
     "release:major": "standard-version --release-as major",
@@ -66,7 +107,6 @@
       "optional": true
     }
   },
-  "types": "./index.d.ts",
   "eslintConfig": {
     "parserOptions": {
       "project": "tsconfig.json"
@@ -85,5 +125,6 @@
   "eslintIgnore": [
     "dist",
     "index.d.ts"
-  ]
+  ],
+  "types": "./index.d.ts"
 }

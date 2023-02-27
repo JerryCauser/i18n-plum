@@ -20,7 +20,7 @@
     "moduleResolution": "nodenext",
     "declaration": true,
     "emitDeclarationOnly": true,
-    "outFile": "index.d.ts",
+    "outDir": "dist/types",
     "target": "esnext"
   },
   "include": [
@@ -28,6 +28,7 @@
   ],
   "exclude": [
     "node_modules",
-    "index.d.ts"
+    "index.d.ts",
+    "dist"
   ]
 }

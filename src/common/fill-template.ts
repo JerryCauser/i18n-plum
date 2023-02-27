@@ -1,3 +1,5 @@
+import type { DictRecord } from './types.js'
+
 /**
  *
  * @param {string} template

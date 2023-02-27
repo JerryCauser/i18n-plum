@@ -3,3 +3,11 @@ node_modules
 sandbox
 .DS_Store
 *.log
+
+# Import location artifacts
+i18n
+i18n-remote
+i18n-remote-cache
+i18n-react-remote-cache
+
+dist

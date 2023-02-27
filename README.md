@@ -3,6 +3,7 @@
 Simple i18n library for both front and back.
 
 #### TODO:
+- [x] correct CJS and ESM exporting with typings
 - [x] basic i18n
 - [x] i18n with remote sources
 - [x] i18n with remote sources and cache

@@ -1,6 +1,7 @@
 import type * as React from 'react'
-import { useContext, createContext, useState, useRef, useEffect } from 'react'
 import type { CacheI18Options } from './i18n-remote-cache.js'
+import type { DictRecord } from './common/types.js'
+import { useContext, createContext, useState, useRef, useEffect } from 'react'
 import { I18nRemoteCache } from './i18n-remote-cache.js'
 
 interface initI18nReactOptions extends CacheI18Options {
