@@ -27,7 +27,9 @@ export class I18nRemoteCache extends I18nRemote {
         cachedTable = JSON.parse(cachedTable) as DictRecord
       }
 
-      if (cachedTable !== null) this.extend(lang, cachedTable)
+      if (cachedTable !== null && cachedTable !== undefined) {
+        this.extend(lang, cachedTable)
+      }
     }
 
     return await super.loadLocale(lang)

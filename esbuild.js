@@ -5,8 +5,8 @@ const packageJsonPath = new URL('package.json', import.meta.url)
 const packageJson = JSON.parse(fs.readFileSync(packageJsonPath).toString())
 
 const external = [
-  ...Object.keys(packageJson.dependencies || {}),
-  ...Object.keys(packageJson.peerDependencies || {})
+  ...Object.keys(packageJson.dependencies ?? {}),
+  ...Object.keys(packageJson.peerDependencies ?? {})
 ]
 
 const filesToBuild = fs
@@ -55,7 +55,7 @@ function fillPackageJson (alias) {
     // types: `./dist/index.d.ts`, // bundling all types in one file not works for now
     types: `./dist/types/${alias}.d.ts`,
     require: `./dist/cjs/${alias}.js`,
-    module: `./dist/esm/${alias}.js`,
+    import: `./dist/esm/${alias}.js`,
     default: `./dist/esm/${alias}.js`
   }
 
@@ -70,7 +70,9 @@ packageJson.files = [
   'LICENSE',
   'package.json'
 ]
-packageJson.exports = {}
+packageJson.exports = {
+  './package.json': './package.json'
+}
 
 for (const fileName of filesToBuild) {
   const [alias] = fileName.split('.')

@@ -71,13 +71,13 @@ export class I18n {
     return this.#tables.get(lang)
   }
 
-  t (key: string | string[], params: DictRecord, lang?: string): string | any {
+  t (key: string | string[], params?: DictRecord, lang?: string): string | any {
     const table = this.get(lang ?? this.#locale)
     const val = takeValue(table, key, this.#separator) ?? key.toString()
 
     if (typeof val === 'function') return val(params)
 
-    return fillTemplate(val, params)
+    return fillTemplate(val, params ?? {})
   }
 
   emit (eventName: string, payload: any): boolean {

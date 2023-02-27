@@ -14,10 +14,13 @@ interface I18nReactWrapperOptions {
   lngDict?: DictRecord
 }
 
+type i18nContextValue = Pick<I18nReact, 't' | 'locale'>
+
 interface initialisedI18NReact {
-  I18nContext: React.Context<I18nReact>
+  I18nContext: React.Context<i18nContextValue>
   I18nWrapper: (options: I18nReactWrapperOptions) => React.ReactElement
-  useI18n: () => I18nReact
+  i18nHelper: I18nReact
+  useI18n: () => i18nContextValue
 }
 
 class I18nReact extends I18nRemoteCache {}
@@ -44,7 +47,12 @@ export function initI18n (options?: initI18nReactOptions): initialisedI18NReact 
 
   i18nHelper.setLocale(defaultLocale)
 
-  const I18nContext = createContext<I18nReact>(i18nHelper)
+  const pickContextValue: () => i18nContextValue = () => ({
+    t: i18nHelper.t.bind(i18nHelper),
+    locale: i18nHelper.locale
+  })
+
+  const I18nContext = createContext<i18nContextValue>(pickContextValue())
 
   function I18nWrapper (options: I18nReactWrapperOptions): React.ReactElement {
     const { children, locale = null, lngDict = null } = options
@@ -69,11 +77,11 @@ export function initI18n (options?: initI18nReactOptions): initialisedI18NReact 
     }
 
     return (
-      <I18nContext.Provider value={i18nHelper}>{children}</I18nContext.Provider>
+      <I18nContext.Provider value={pickContextValue()}>{children}</I18nContext.Provider>
     )
   }
 
-  function useI18n (): I18nReact {
+  function useI18n (): i18nContextValue {
     const i18n = useContext(I18nContext)
 
     return i18n
@@ -82,6 +90,7 @@ export function initI18n (options?: initI18nReactOptions): initialisedI18NReact 
   return {
     I18nContext,
     I18nWrapper,
+    i18nHelper,
     useI18n
   }
 }

@@ -5,34 +5,35 @@
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "exports": {
+    "./package.json": "./package.json",
     "./i18n-react-remote-cache": {
       "types": "./dist/types/i18n-react-remote-cache.d.ts",
       "require": "./dist/cjs/i18n-react-remote-cache.js",
-      "module": "./dist/esm/i18n-react-remote-cache.js",
+      "import": "./dist/esm/i18n-react-remote-cache.js",
       "default": "./dist/esm/i18n-react-remote-cache.js"
     },
     "./i18n-remote-cache": {
       "types": "./dist/types/i18n-remote-cache.d.ts",
       "require": "./dist/cjs/i18n-remote-cache.js",
-      "module": "./dist/esm/i18n-remote-cache.js",
+      "import": "./dist/esm/i18n-remote-cache.js",
       "default": "./dist/esm/i18n-remote-cache.js"
     },
     "./i18n-remote": {
       "types": "./dist/types/i18n-remote.d.ts",
       "require": "./dist/cjs/i18n-remote.js",
-      "module": "./dist/esm/i18n-remote.js",
+      "import": "./dist/esm/i18n-remote.js",
       "default": "./dist/esm/i18n-remote.js"
     },
     "./i18n": {
       "types": "./dist/types/i18n.d.ts",
       "require": "./dist/cjs/i18n.js",
-      "module": "./dist/esm/i18n.js",
+      "import": "./dist/esm/i18n.js",
       "default": "./dist/esm/i18n.js"
     },
     ".": {
       "types": "./dist/types/index.d.ts",
       "require": "./dist/cjs/index.js",
-      "module": "./dist/esm/index.js",
+      "import": "./dist/esm/index.js",
       "default": "./dist/esm/index.js"
     }
   },
