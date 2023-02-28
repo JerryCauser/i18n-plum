@@ -1,6 +1,6 @@
 {
   "name": "i18n-plum",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "i18n library for both front and back",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
@@ -66,6 +66,7 @@
     "release:patch": "standard-version --release-as patch",
     "release:minor": "standard-version --release-as minor",
     "release:major": "standard-version --release-as major",
+    "prepublishOnly": "npm run build",
     "push-with-tags": "git push --follow-tags origin master",
     "prettify": "prettier --write -u './src/{**/*,*}.{js,ts,jsx,tsx}'",
     "fix": "npm run prettify && eslint . --fix",
