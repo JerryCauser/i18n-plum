@@ -77,7 +77,9 @@ export function initI18n (options?: initI18nReactOptions): initialisedI18NReact 
     }
 
     return (
-      <I18nContext.Provider value={pickContextValue()}>{children}</I18nContext.Provider>
+      <I18nContext.Provider value={pickContextValue()}>
+        {children}
+      </I18nContext.Provider>
     )
   }
 

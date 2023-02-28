@@ -25,7 +25,8 @@ export class I18nRemote extends I18n {
   constructor (options?: RemoteI18Options) {
     super(options)
 
-    this.#fetcher = options?.fetcher ?? (async (input: string) => await fetch(input))
+    this.#fetcher =
+      options?.fetcher ?? (async (input: string) => await fetch(input))
     this.#languageToken = options?.languageToken ?? '{{lang}}'
     this.#path = options?.path ?? `/i18n/${this.#languageToken}.json`
     this.#pathCompiler =

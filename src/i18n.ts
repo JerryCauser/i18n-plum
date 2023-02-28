@@ -77,7 +77,11 @@ export class I18n {
     return this.#tables.get(lang)
   }
 
-  #t (lang: Nullable<string>, key: string | string[], params?: DictRecord): string | undefined {
+  #t (
+    lang: Nullable<string>,
+    key: string | string[],
+    params?: DictRecord
+  ): string | undefined {
     if (typeof lang !== 'string') return undefined
 
     const table = this.get(lang)
@@ -91,7 +95,11 @@ export class I18n {
     return undefined
   }
 
-  t (key: string | string[], params?: DictRecord, lang?: string): Nullable<string> {
+  t (
+    key: string | string[],
+    params?: DictRecord,
+    lang?: string
+  ): Nullable<string> {
     let output = this.#t(lang ?? this.#locale, key, params)
 
     if (output === undefined && this.#fallback !== null) {
