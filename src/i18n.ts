@@ -7,6 +7,8 @@ export interface I18nOptions {
   locale?: string
   tables?: TablesRecordType
   separator?: string
+  fallback?: string
+  fallbackWithKey?: boolean
 }
 
 export type TablesRecordType = Record<string, Nullable<DictRecord>>
@@ -21,6 +23,8 @@ export class I18n {
   #locale: string
   #tables: TablesMapType = new Map()
   #separator: string
+  #fallback: string | null = null
+  #fallbackWithKey: boolean = true
 
   #eventFunctions: Map<Function, eventContext> = new Map()
 
@@ -28,6 +32,8 @@ export class I18n {
     this.#tables = convertDictToMap(options?.tables ?? {})
     this.#locale = options?.locale ?? ''
     this.#separator = options?.separator ?? '.'
+    this.#fallback = options?.fallback ?? null
+    this.#fallbackWithKey = options?.fallbackWithKey ?? true
   }
 
   get locale (): string {
@@ -71,13 +77,32 @@ export class I18n {
     return this.#tables.get(lang)
   }
 
-  t (key: string | string[], params?: DictRecord, lang?: string): string | any {
-    const table = this.get(lang ?? this.#locale)
-    const val = takeValue(table, key, this.#separator) ?? key.toString()
+  #t (lang: Nullable<string>, key: string | string[], params?: DictRecord): string | undefined {
+    if (typeof lang !== 'string') return undefined
 
-    if (typeof val === 'function') return val(params)
+    const table = this.get(lang)
+    if (!(table instanceof Map)) return undefined
 
-    return fillTemplate(val, params ?? {})
+    const val = takeValue(table, key, this.#separator)
+
+    if (typeof val === 'string') return fillTemplate(val, params ?? {})
+    if (typeof val === 'function') return val(params) ?? ''
+
+    return undefined
+  }
+
+  t (key: string | string[], params?: DictRecord, lang?: string): Nullable<string> {
+    let output = this.#t(lang ?? this.#locale, key, params)
+
+    if (output === undefined && this.#fallback !== null) {
+      output = this.#t(this.#fallback, key, params)
+    }
+
+    if (output === undefined && this.#fallbackWithKey) {
+      output = Array.isArray(key) ? key.join(this.#separator) : key
+    }
+
+    return output
   }
 
   emit (eventName: string, payload: any): boolean {
