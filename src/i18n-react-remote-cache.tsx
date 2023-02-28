@@ -28,22 +28,9 @@ export class I18nReact extends I18nRemoteCache {}
 export function initI18n (options?: initI18nReactOptions): initialisedI18NReact {
   options ??= {}
 
-  const {
-    defaultLocale = 'en',
-    path,
-    storage,
-    fetcher,
-    pathCompiler,
-    languageToken
-  } = options
+  const defaultLocale = options?.defaultLocale ?? 'en'
 
-  const i18nHelper = new I18nReact({
-    path,
-    storage,
-    fetcher,
-    pathCompiler,
-    languageToken
-  })
+  const i18nHelper = new I18nReact(options)
 
   i18nHelper.setLocale(defaultLocale)
 

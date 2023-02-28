@@ -90,7 +90,6 @@ export class I18n {
     const val = takeValue(table, key, this.#separator)
 
     if (typeof val === 'string') return fillTemplate(val, params ?? {})
-    if (typeof val === 'function') return val(params) ?? ''
 
     return undefined
   }

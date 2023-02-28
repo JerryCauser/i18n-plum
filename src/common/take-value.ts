@@ -4,7 +4,7 @@ import type { Nullable } from './types.js'
  * @param {Map<string, any>} map
  * @param {string | string[]} keys
  * @param {string} [separator]
- * @return {Nullable<string | Function>}
+ * @return {Nullable<string>}
  */
 function takeValue (
   map: Map<string, any>,
