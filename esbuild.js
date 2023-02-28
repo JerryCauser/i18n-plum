@@ -87,10 +87,12 @@ fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2) + '\n')
  * @param {'esm' | 'cjs' } format
  */
 function buildForFormat (format) {
+  const outdir = './dist/' + format
+
   esbuild.buildSync({
     entryPoints: filesToBuild.map(file => `src/${file}`),
     nodePaths: ['./'],
-    outdir: './dist/' + format,
+    outdir,
     sourcemap: true,
     jsx: 'automatic',
     minify: true,
@@ -100,6 +102,13 @@ function buildForFormat (format) {
     target: ['esnext', 'node16', 'chrome100'],
     format
   })
+
+  if (format === 'cjs') {
+    fs.writeFileSync(
+      new URL(outdir + '/package.json', import.meta.url),
+      JSON.stringify({ type: 'commonjs' }, null, 2)
+    )
+  }
 }
 
 buildForFormat('cjs')
