@@ -1,6 +1,6 @@
 {
   "name": "i18n-plum",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "i18n library for both front and back",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
