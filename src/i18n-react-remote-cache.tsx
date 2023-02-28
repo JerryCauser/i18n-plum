@@ -4,26 +4,26 @@ import type { DictRecord } from './common/types.js'
 import { useContext, createContext, useState, useRef, useEffect } from 'react'
 import { I18nRemoteCache } from './i18n-remote-cache.js'
 
-interface initI18nReactOptions extends CacheI18Options {
+export interface initI18nReactOptions extends CacheI18Options {
   defaultLocale?: string
 }
 
-interface I18nReactWrapperOptions {
+export interface I18nReactWrapperOptions {
   children: React.ReactElement
   locale?: string | null
   lngDict?: DictRecord
 }
 
-type i18nContextValue = Pick<I18nReact, 't' | 'locale'>
+export type i18nContextValue = Pick<I18nReact, 't' | 'locale'>
 
-interface initialisedI18NReact {
+export interface initialisedI18NReact {
   I18nContext: React.Context<i18nContextValue>
   I18nWrapper: (options: I18nReactWrapperOptions) => React.ReactElement
   i18nHelper: I18nReact
   useI18n: () => i18nContextValue
 }
 
-class I18nReact extends I18nRemoteCache {}
+export class I18nReact extends I18nRemoteCache {}
 
 export function initI18n (options?: initI18nReactOptions): initialisedI18NReact {
   options ??= {}
